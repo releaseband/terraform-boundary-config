@@ -17,22 +17,22 @@ provider "vault" {
 }
 
 terraform {
-required_version = ">= 1.0"
+  required_version = ">= 1.0"
   required_providers {
     random = {
-      source = "hashicorp/random"
+      source  = "hashicorp/random"
       version = ">= 3.4"
     }
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = ">= 4.48"
     }
     vault = {
-      source = "hashicorp/vault"
+      source  = "hashicorp/vault"
       version = ">= 3.11"
     }
     boundary = {
-      source = "hashicorp/boundary"
+      source  = "hashicorp/boundary"
       version = ">= 1.1"
     }
   }
