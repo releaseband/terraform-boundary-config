@@ -66,4 +66,10 @@
 | <a name="input_eks_cluster_name"></a> [eks\_cluster\_name](#input\_eks\_cluster\_name) | Name of EKS cluster for provider config and nodeselectors | `string` | n/a | yes |
 | <a name="input_users"></a> [users](#input\_users) | list of boundary readonly users | `list(string)` | n/a | yes |
 | <a name="input_vault_token"></a> [vault\_token](#input\_vault\_token) | Token for vault provider | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_foundation_scope_id"></a> [foundation\_scope\_id](#output\_foundation\_scope\_id) | n/a |
 <!-- END_TF_DOCS -->
