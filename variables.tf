@@ -32,12 +32,17 @@ variable "boundary_users_loki" {
   type        = list(string)
 }
 
-variable "admin_users" {
-  description = "list of boundary admin users"
-  type        = list(string)
-  default     = ["admin"]
-}
 variable "users" {
   description = "list of boundary readonly users"
+  type        = list(string)
+}
+
+variable "users_loki_azure" {
+  description = "list of users with access to loki across the boundary"
+  type        = list(string)
+}
+
+variable "admin_users_azure" {
+  description = "list of admins with access the boundary"
   type        = list(string)
 }

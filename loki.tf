@@ -57,3 +57,33 @@ resource "boundary_role" "loki" {
   grant_strings = ["id=${boundary_target.loki.id};actions=authorize-session"]
   scope_id      = boundary_scope.foundation.id
 }
+
+
+# AZURE
+
+resource "azuread_group" "loki" {
+  display_name     = "Boundary ${var.eks_cluster_name} loki"
+  security_enabled = true
+}
+
+resource "azuread_group_member" "loki" {
+  for_each         = toset(var.users_loki_azure)
+  group_object_id  = azuread_group.loki.id
+  member_object_id = data.azuread_user.main[each.key].id
+}
+
+
+resource "boundary_role" "loki_azure" {
+  name          = "loki-azure"
+  description   = "loki-azure"
+  principal_ids = [boundary_managed_group.loki.id]
+  grant_strings = ["ids=${boundary_target.loki.id};actions=authorize-session"]
+  scope_id      = boundary_scope.foundation.id
+}
+
+resource "boundary_managed_group" "loki" {
+  auth_method_id = boundary_auth_method_oidc.azuread.id
+  description    = "Boundary managed group: loki"
+  name           = "loki-azure"
+  filter         = "\"${azuread_group.loki.object_id}\" in \"/token/groups\""
+}

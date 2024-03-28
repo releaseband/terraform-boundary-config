@@ -1,52 +1,44 @@
 resource "random_password" "admin_pass" {
-  for_each = toset(var.admin_users)
-  length   = 20
-  special  = false
+  length  = 20
+  special = false
 }
 
 resource "boundary_account_password" "admin_accs" {
-  for_each       = toset(var.admin_users)
-  name           = lower(each.key)
-  description    = "Admin account for ${each.key}"
+  name           = "admin"
+  description    = "Admin account"
   type           = "password"
-  login_name     = lower(each.key)
-  password       = random_password.admin_pass[each.key].result
+  login_name     = "admin"
+  password       = random_password.admin_pass.result
   auth_method_id = boundary_auth_method.password.id
 }
 
 resource "boundary_user" "admin_users" {
-  for_each    = toset(var.admin_users)
-  name        = each.key
-  description = "User resource for ${each.key}"
+  name        = "admin"
+  description = "User resource for admin"
   scope_id    = boundary_scope.org.id
-  account_ids = [boundary_account_password.admin_accs[each.key].id]
+  account_ids = [boundary_account_password.admin_accs.id]
 }
 
 resource "vault_generic_secret" "admin_pass" {
-  for_each  = toset(var.admin_users)
-  path      = "secrets/boundary/${each.key}"
+  path      = "secrets/boundary/admin"
   data_json = <<EOT
 {
-  "pass":"${random_password.admin_pass[each.key].result}",
-  "id":"${boundary_user.admin_users[each.key].id}"
+  "pass":"${random_password.admin_pass.result}",
+  "id":"${boundary_user.admin_users.id}"
 }
 EOT
 }
 
-resource "boundary_role" "org_admin" {
-  name          = "org_admin"
+resource "boundary_role" "org_admin_password" {
+  name          = "org_admin_password"
   scope_id      = boundary_scope.org.id
-  grant_strings = ["id=*;type=*;actions=*"]
-  principal_ids = concat(
-    [for user in boundary_user.admin_users : user.id]
-  )
+  grant_strings = ["ids=*;type=*;actions=*"]
+  principal_ids = [boundary_user.admin_users.id]
 }
 
-resource "boundary_role" "global_admin" {
-  name          = "global_admin"
+resource "boundary_role" "global_admin_password" {
+  name          = "global_admin_password"
   scope_id      = boundary_scope.global.id
-  grant_strings = ["id=*;type=*;actions=*"]
-  principal_ids = concat(
-    [for user in boundary_user.admin_users : user.id]
-  )
+  grant_strings = ["ids=*;type=*;actions=*"]
+  principal_ids = [boundary_user.admin_users.id]
 }
