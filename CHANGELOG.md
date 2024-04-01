@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/releaseband/terraform-boundary-config/compare/v1.1.0...v1.2.0) (2024-03-28)
+
+
+### Features
+
+* add azure auth method ([fe44e64](https://github.com/releaseband/terraform-boundary-config/commit/fe44e640c23ab5042de08df038cb734a3977eb06))
+
 ## [1.1.0](https://github.com/releaseband/terraform-boundary-config/compare/v1.0.1...v1.1.0) (2023-03-28)
 
 
