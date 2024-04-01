@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/releaseband/terraform-boundary-config/compare/v1.2.0...v1.2.1) (2024-04-01)
+
+
+### Bug Fixes
+
+* add output boundary_auth_method_oidc ([7dde91b](https://github.com/releaseband/terraform-boundary-config/commit/7dde91bdcc22c18d85ba0ab4cb3381f02bb56585))
+
 ## [1.2.0](https://github.com/releaseband/terraform-boundary-config/compare/v1.1.0...v1.2.0) (2024-03-28)
 
 
