@@ -91,5 +91,6 @@
 
 | Name | Description |
 |------|-------------|
+| <a name="output_boundary_auth_method_oidc_id"></a> [boundary\_auth\_method\_oidc\_id](#output\_boundary\_auth\_method\_oidc\_id) | n/a |
 | <a name="output_foundation_scope_id"></a> [foundation\_scope\_id](#output\_foundation\_scope\_id) | n/a |
 <!-- END_TF_DOCS -->
