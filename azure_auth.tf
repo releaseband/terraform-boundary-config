@@ -82,7 +82,7 @@ resource "boundary_auth_method_oidc" "azuread" {
   signing_algorithms   = ["RS256"]
   api_url_prefix       = "https://boundary.${var.domain_name}"
   name                 = "Microsoft"
-  is_primary_for_scope = false
+  is_primary_for_scope = true
   claims_scopes        = ["email", "profile"]
 }
 
