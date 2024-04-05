@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/releaseband/terraform-boundary-config/compare/v1.2.1...v1.2.2) (2024-04-05)
+
+
+### Bug Fixes
+
+* add primary auth method ([c85f9d9](https://github.com/releaseband/terraform-boundary-config/commit/c85f9d9cb22e389acdd497560f9a808c1a2402ba))
+
 ## [1.2.1](https://github.com/releaseband/terraform-boundary-config/compare/v1.2.0...v1.2.1) (2024-04-01)
 
 
