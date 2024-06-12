@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/releaseband/terraform-boundary-config/compare/v1.2.2...v1.2.3) (2024-06-12)
+
+
+### Bug Fixes
+
+* add outputs ([2fa97ee](https://github.com/releaseband/terraform-boundary-config/commit/2fa97ee8be2a2193d01e12130281e2374b9fd042))
+
 ## [1.2.2](https://github.com/releaseband/terraform-boundary-config/compare/v1.2.1...v1.2.2) (2024-04-05)
 
 
