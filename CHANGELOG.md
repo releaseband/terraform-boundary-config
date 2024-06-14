@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/releaseband/terraform-boundary-config/compare/v1.2.3...v1.3.0) (2024-06-14)
+
+
+### Features
+
+* map azure groups by name ([8ff810b](https://github.com/releaseband/terraform-boundary-config/commit/8ff810b9d4a3c13125bd7fcca87fed3bd525da2b))
+
 ## [1.2.3](https://github.com/releaseband/terraform-boundary-config/compare/v1.2.2...v1.2.3) (2024-06-12)
 
 
