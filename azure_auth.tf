@@ -1,12 +1,12 @@
 data "azuread_client_config" "current" {}
 
 resource "azuread_group" "main" {
-  display_name     = "Boundary ${var.eks_cluster_name} users"
+  display_name     = "boundary_${var.eks_cluster_name}_users"
   security_enabled = true
 }
 
 resource "azuread_group" "admins" {
-  display_name     = "Boundary ${var.eks_cluster_name} admins"
+  display_name     = "boundary_${var.eks_cluster_name}_admins"
   security_enabled = true
 }
 data "azuread_user" "main" {
@@ -38,7 +38,7 @@ resource "azuread_application" "main" {
       "https://boundary.${var.domain_name}/v1/auth-methods/oidc:authenticate:callback",
     ]
   }
-  group_membership_claims = ["All"]
+  group_membership_claims = ["ApplicationGroup"]
 
   required_resource_access {
     resource_app_id = "00000003-0000-0000-c000-000000000000" # Microsoft Graph
@@ -56,6 +56,23 @@ resource "azuread_application" "main" {
     resource_access {
       id   = "98830695-27a2-44f7-8c18-0c3ebc9698f6" # GroupMember.Read.All
       type = "Scope"
+    }
+  }
+  optional_claims {
+    access_token {
+      additional_properties = ["cloud_displayname"]
+      essential             = false
+      name                  = "groups"
+    }
+    id_token {
+      additional_properties = ["cloud_displayname"]
+      essential             = false
+      name                  = "groups"
+    }
+    saml2_token {
+      additional_properties = ["cloud_displayname"]
+      essential             = false
+      name                  = "groups"
     }
   }
 }
@@ -90,14 +107,14 @@ resource "boundary_managed_group" "admin" {
   auth_method_id = boundary_auth_method_oidc.azuread.id
   description    = "Boundary Admins managed group"
   name           = "BoundaryAdmins"
-  filter         = "\"${azuread_group.admins.object_id}\" in \"/token/groups\""
+  filter         = "\"boundary_${var.eks_cluster_name}_admins\" in \"/token/groups\""
 }
 
 resource "boundary_managed_group" "readonly" {
   auth_method_id = boundary_auth_method_oidc.azuread.id
-  description    = "Boundary redonly managed group"
+  description    = "Boundary readonly managed group"
   name           = "BoundaryReadonly"
-  filter         = "\"${azuread_group.main.object_id}\" in \"/token/groups\""
+  filter         = "\"boundary_${var.eks_cluster_name}_users\" in \"/token/groups\""
 }
 
 resource "boundary_role" "org_admin" {
