@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/releaseband/terraform-boundary-config/compare/v1.3.0...v1.3.1) (2024-06-25)
+
+
+### Bug Fixes
+
+* loki boundary conf ([35e0e25](https://github.com/releaseband/terraform-boundary-config/commit/35e0e250fec1fe04ab0db381f00a487e928b0c6f))
+
 ## [1.3.0](https://github.com/releaseband/terraform-boundary-config/compare/v1.2.3...v1.3.0) (2024-06-14)
 
 
