@@ -62,7 +62,7 @@ resource "boundary_role" "loki" {
 # AZURE
 
 resource "azuread_group" "loki" {
-  display_name     = "Boundary ${var.eks_cluster_name} loki"
+  display_name     = "boundary_${var.eks_cluster_name}_loki"
   security_enabled = true
 }
 
@@ -85,5 +85,16 @@ resource "boundary_managed_group" "loki" {
   auth_method_id = boundary_auth_method_oidc.azuread.id
   description    = "Boundary managed group: loki"
   name           = "loki-azure"
-  filter         = "\"${azuread_group.loki.object_id}\" in \"/token/groups\""
+  filter         = "\"boundary_${var.eks_cluster_name}_loki\" in \"/token/groups\""
+}
+
+
+resource "azuread_app_role_assignment" "loki" {
+  app_role_id         = "00000000-0000-0000-0000-000000000000"
+  principal_object_id = azuread_group.loki.object_id
+  resource_object_id  = data.azuread_service_principal.main.object_id
+}
+
+data "azuread_service_principal" "main" {
+  display_name = "Boundary ${var.eks_cluster_name}"
 }
