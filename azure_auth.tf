@@ -17,8 +17,8 @@ data "azuread_user" "main" {
 
 resource "azuread_group_member" "admin" {
   for_each         = toset(var.admin_users_azure)
-  group_object_id  = azuread_group.admins.id
-  member_object_id = data.azuread_user.main[each.key].id
+  group_object_id  = azuread_group.admins.object_id
+  member_object_id = data.azuread_user.main[each.key].object_id
 }
 
 resource "azuread_app_role_assignment" "admins" {
@@ -78,7 +78,7 @@ resource "azuread_application" "main" {
 }
 
 resource "azuread_service_principal" "main" {
-  client_id = azuread_application.main.application_id
+  client_id = azuread_application.main.client_id
   feature_tags {
     enterprise = true
   }
@@ -93,7 +93,7 @@ resource "azuread_application_password" "main" {
 resource "boundary_auth_method_oidc" "azuread" {
   scope_id             = boundary_scope.org.id
   issuer               = "https://login.microsoftonline.com/${data.azuread_client_config.current.tenant_id}/v2.0"
-  client_id            = azuread_application.main.application_id
+  client_id            = azuread_application.main.client_id
   client_secret        = azuread_application_password.main.value
   callback_url         = "https://boundary.${var.domain_name}/v1/auth-methods/oidc:authenticate:callback"
   signing_algorithms   = ["RS256"]
