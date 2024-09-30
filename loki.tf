@@ -68,8 +68,8 @@ resource "azuread_group" "loki" {
 
 resource "azuread_group_member" "loki" {
   for_each         = toset(var.users_loki_azure)
-  group_object_id  = azuread_group.loki.id
-  member_object_id = data.azuread_user.main[each.key].id
+  group_object_id  = azuread_group.loki.object_id
+  member_object_id = data.azuread_user.main[each.key].object_id
 }
 
 
