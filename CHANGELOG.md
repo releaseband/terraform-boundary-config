@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/releaseband/terraform-boundary-config/compare/v1.3.1...v1.3.2) (2024-09-30)
+
+
+### Bug Fixes
+
+* azure config ([b8064ef](https://github.com/releaseband/terraform-boundary-config/commit/b8064ef5563ae488437cf8235e7fab416401441d))
+
 ## [1.3.1](https://github.com/releaseband/terraform-boundary-config/compare/v1.3.0...v1.3.1) (2024-06-25)
 
 
