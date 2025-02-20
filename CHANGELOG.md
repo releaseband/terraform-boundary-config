@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.3](https://github.com/releaseband/terraform-boundary-config/compare/v1.3.2...v1.3.3) (2025-02-20)
+
+
+### Bug Fixes
+
+* Add variables and refactor code ([749fc6b](https://github.com/releaseband/terraform-boundary-config/commit/749fc6b84552219e0c7895fd7435673ab2efb3e6))
+
 ## [1.3.2](https://github.com/releaseband/terraform-boundary-config/compare/v1.3.1...v1.3.2) (2024-09-30)
 
 
