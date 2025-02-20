@@ -3,7 +3,7 @@ variable "eks_cluster_name" {
   type        = string
 }
 
-variable "domain_name" {
+variable "domain" {
   description = "Domain for dns records"
   type        = string
 }

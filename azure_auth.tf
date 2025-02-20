@@ -31,11 +31,11 @@ resource "azuread_application" "main" {
   display_name = "Boundary ${var.eks_cluster_name}"
 
   identifier_uris = [
-    "https://boundary.${var.domain_name}/v1/auth-methods/oidc:authenticate:callback",
+    "https://boundary.${var.domain}/v1/auth-methods/oidc:authenticate:callback",
   ]
   web {
     redirect_uris = [
-      "https://boundary.${var.domain_name}/v1/auth-methods/oidc:authenticate:callback",
+      "https://boundary.${var.domain}/v1/auth-methods/oidc:authenticate:callback",
     ]
   }
   group_membership_claims = ["ApplicationGroup"]
@@ -95,9 +95,9 @@ resource "boundary_auth_method_oidc" "azuread" {
   issuer               = "https://login.microsoftonline.com/${data.azuread_client_config.current.tenant_id}/v2.0"
   client_id            = azuread_application.main.client_id
   client_secret        = azuread_application_password.main.value
-  callback_url         = "https://boundary.${var.domain_name}/v1/auth-methods/oidc:authenticate:callback"
+  callback_url         = "https://boundary.${var.domain}/v1/auth-methods/oidc:authenticate:callback"
   signing_algorithms   = ["RS256"]
-  api_url_prefix       = "https://boundary.${var.domain_name}"
+  api_url_prefix       = "https://boundary.${var.domain}"
   name                 = "Microsoft"
   is_primary_for_scope = true
   claims_scopes        = ["email", "profile"]
