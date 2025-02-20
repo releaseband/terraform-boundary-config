@@ -1,5 +1,5 @@
 provider "boundary" {
-  addr             = "https://boundary.${var.domain_name}"
+  addr             = "https://boundary.${var.domain}"
   recovery_kms_hcl = <<EOT
   kms "awskms" {
   purpose    = "recovery"
@@ -12,7 +12,7 @@ EOT
 }
 
 provider "vault" {
-  address = "https://vault.${var.domain_name}/"
+  address = "https://vault.${var.domain}/"
   token   = var.vault_token
 }
 
